@@ -1,188 +1,78 @@
 <template>
-    <div id="app">
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
-              integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB"
-              crossorigin="anonymous">
-        <h1 class="text-center"
-            :class="[
-                          currentTab === 'Fishs' ? 'Fishs' : '',
-                          currentTab === 'Cats' ? 'Cats' : '',
-                          currentTab === 'Dogs' ? 'Dogs' : ''
-                          ]">{{ header }}</h1>
-        <div class="container">
-            <button
-                    v-for="tab in tabs"
-                    v-bind:key="tab"
-                    v-bind:class="['tab-button', { active: currentTab === tab }]"
-                    v-on:click="currentTab = tab"
-            >{{ tab }}
-            </button>
+  <v-app>
+    <v-navigation-drawer
+            app
+            temporary
+            v-model="drawer">
+      <v-list>
+        <v-list-tile
+                :to="link.url"
+                v-for="link in links"
+                :key="link.title"
+        >
+          <v-list-tile-action>
+            <v-icon>{{ link.icon }}</v-icon>
+          </v-list-tile-action>
+          <v-list-tile-content>
+            <v-list-tile-title v-text="link.title"></v-list-tile-title>
+          </v-list-tile-content>
+        </v-list-tile>
+      </v-list>
 
-            <div v-for="(elem, index) in elements">
-                <Element
-                        :count="elem.count"
-                        :index="index"
-                        :name="elem.name"
-                        :length="elem.length"
-                        :detail="elem.detail"
-                        :class="[
-                          currentTab === 'Fishs' ? 'Fishs' : '',
-                          currentTab === 'Cats' ? 'Cats' : '',
-                          currentTab === 'Dogs' ? 'Dogs' : ''
-                          ]"
-                        @ordered="setCountOrder($event)"
-                ></Element>
-            </div>
-        </div>
-    </div>
+    </v-navigation-drawer>
+
+    <v-toolbar app dark color="primary">
+      <v-toolbar-side-icon
+              @click="drawer = !drawer"
+              class="hidden-md-and-up"
+      ></v-toolbar-side-icon>
+
+      <v-toolbar-title>
+        <router-link to="/" tag="span" class="pointer">
+          Ad application
+        </router-link>
+      </v-toolbar-title>
+      <v-spacer></v-spacer>
+      <v-toolbar-items class="hidden-sm-and-down">
+        <v-btn
+                flat
+                v-for="link in links"
+                :key="link.title"
+                :to="link.url"
+        >
+          <v-icon>{{ link.icon }}</v-icon>
+          {{ link.title }}
+        </v-btn>
+      </v-toolbar-items>
+    </v-toolbar>
+    <v-content>
+      <router-view></router-view>
+    </v-content>
+  </v-app>
 </template>
 
 <script>
-    import Element from './components/element.vue'
-
-    export default {
-        name: 'App',
-
-        data() {
-            return {
-                particleHeader: 'Риби',
-                fishs: {
-                    name: 'Риби',
-                    elem:
-                        [{
-                            name: 'Fish1',
-                            length: 10,
-                            detail: 'detal1',
-                            count: 0
-                        },
-                            {
-                                name: 'Fish2',
-                                length: 20,
-                                detail: 'detal2',
-                                count: 0
-                            },
-                            {
-                                name: 'Fish3',
-                                length: 30,
-                                detail: 'detal3',
-                                count: 0
-                            }
-                        ]
-                },
-                dogs: {
-                    name: 'Собаки',
-                    elem: [
-                        {
-                            name: 'dog1',
-                            length: 10,
-                            detail: 'detal1',
-                            count: 0
-                        },
-                        {
-                            name: 'dog2',
-                            length: 20,
-                            detail: 'detal2',
-                            count: 0
-                        },
-                        {
-                            name: 'dog3',
-                            length: 30,
-                            detail: 'detal3',
-                            count: 0
-                        }]
-                },
-                cats: {
-                    name: 'Коти',
-                    elem: [
-                        {
-                            length: 10,
-                            detail: 'detal1',
-                            count: 0
-                        },
-                        {
-                            name: 'cat2',
-                            length: 20,
-                            detail: 'detal2',
-                            count: 0
-                        },
-                        /*          {
-                                    name: 'cat3',
-                                    length: 30,
-                                    detail: 'detal3'
-                                  }*/
-                    ]
-                },
-
-                currentTab:
-                    'Fishs',
-                tabs:
-                    ['Fishs', 'Dogs', 'Cats']
-            }
-        }
-        ,
-        computed:
-            {
-                elements: function () {
-                    let e = this.currentTab.toLowerCase();
-                    return this[e].elem
-                }
-                ,
-                header: function () {
-                    let e = this.currentTab.toLowerCase();
-                    return this[e].name
-                }
-            }
-        ,
-        methods: {
-            setCountOrder: function (e) {
-//        console.log(this[this.currentTab.toLowerCase()].elem);
-                this[this.currentTab.toLowerCase()].elem[e[1]].count = e[0] + 1;
-            }
-        },
-        components: {
-            Element
-        }
+  export default {
+    data () {
+      return {
+        drawer: false,
+        links: [
+          {title: 'Login', icon: 'lock', url: '/login'},
+          {title: 'Registration', icon: 'face', url: '/registration'},
+          {title: 'Orders', icon: 'bookmark_border', url: '/orders'},
+          {title: 'New ad', icon: 'note_add', url: '/new'},
+          {title: 'My ads', icon: 'list', url: '/list'}
+        ]
+      }
     }
+  }
 </script>
+<style scoped>
+  .pointer{
+    cursor: pointer;
 
-<style>
-    #app {
-        /*font-family: 'Avenir', Helvetica, Arial, sans-serif;*/
-        /*-webkit-font-smoothing: antialiased;*/
-        /*-moz-osx-font-smoothing: grayscale;*/
-        /*text-align: center;*/
-        /*color: #2c3e50;*/
-        margin-top: 60px;
-    }
-
-    .tab-button {
-        padding: 6px 10px;
-        border-top-left-radius: 3px;
-        border-top-right-radius: 3px;
-        border: 1px solid #ccc;
-        cursor: pointer;
-        background: #f0f0f0;
-        margin-bottom: 10px;
-        margin-right: 4px;
-    }
-
-    .tab-button:hover {
-        background: #e0e0e0;
-    }
-
-    .tab-button.active {
-        background: #e0e0e0;
-    }
-
-    .Fishs {
-        color: blue;
-    }
-
-    .Dogs {
-        color: saddlebrown;
-    }
-
-    .Cats {
-        color: black;
-    }
+  }
+  .pointer:hover{
+    color: greenyellow;
+  }
 </style>
