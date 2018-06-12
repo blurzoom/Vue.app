@@ -29,7 +29,7 @@
 
       <v-toolbar-title>
         <router-link to="/" tag="span" class="pointer">
-          Ad application
+          Оголошення
         </router-link>
       </v-toolbar-title>
       <v-spacer></v-spacer>
@@ -57,11 +57,11 @@
       return {
         drawer: false,
         links: [
-          {title: 'Login', icon: 'lock', url: '/login'},
-          {title: 'Registration', icon: 'face', url: '/registration'},
-          {title: 'Orders', icon: 'bookmark_border', url: '/orders'},
-          {title: 'New ad', icon: 'note_add', url: '/new'},
-          {title: 'My ads', icon: 'list', url: '/list'}
+          {title: 'Увійти', icon: 'lock', url: '/login'},
+          {title: 'Реєстрація', icon: 'face', url: '/registration'},
+          {title: 'Замовлення', icon: 'bookmark_border', url: '/orders'},
+          {title: 'Нове оголошення', icon: 'note_add', url: '/new'},
+          {title: 'Мої оголошення', icon: 'list', url: '/list'}
         ]
       }
     }

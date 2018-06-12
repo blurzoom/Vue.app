@@ -7,7 +7,10 @@
                         <v-toolbar-title>Login form</v-toolbar-title>
                     </v-toolbar>
                     <v-card-text>
-                        <v-form ref="form" v-model="valid" validation>
+                        <v-form
+                                ref="form"
+                                v-model="valid"
+                                validation>
                             <v-text-field
                                     prepend-icon="person"
                                     name="email"
@@ -20,7 +23,7 @@
                                     id="password"
                                     prepend-icon="lock"
                                     name="password"
-                                    label="Password"
+                                    label="Пароль"
                                     type="password"
                                     :counter="6"
                                     v-model="password"
@@ -51,12 +54,12 @@
         password: '',
         valid: false,
         emailRules: [
-          v => !!v || 'E-mail is required',
-          v => /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(v) || 'E-mail must be valid'
+          v => !!v || 'E-mail обовязковий',
+          v => /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(v) || 'E-mail має бути коректним'
         ],
         passwordRules: [
-          v => !!v || 'Password is required',
-          v => (v && v.length >= 6) || 'Password must be equal or more  than 6 characters'
+          v => !!v || 'Пароль обовязковий',
+          v => (v && v.length >= 6) || 'Пароль має містити 6 знаків або більше'
         ]
       }
     },
@@ -67,7 +70,7 @@
             email: this.email,
             password: this.password
           }
-          console.log(user)
+          alert('Ви вказали емайл: ' + user.email + ', пароль: ' + user.password)
         }
       }
     }

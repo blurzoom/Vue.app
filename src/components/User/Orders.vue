@@ -1,8 +1,8 @@
 <template>
     <v-container>
         <v-layout row>
-            <v-flex xs12>
-                <h1>Orders</h1>
+            <v-flex xs12 sm6 offset-sm3>
+                <h1 class="text-xs-center">Замовлення</h1>
             </v-flex>
         </v-layout>
     </v-container>

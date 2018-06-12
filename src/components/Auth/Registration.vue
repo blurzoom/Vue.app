@@ -61,16 +61,16 @@
         confirmPassword: '',
         valid: false,
         emailRules: [
-          v => !!v || 'E-mail is required',
-          v => /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(v) || 'E-mail must be valid'
+          v => !!v || 'E-mail is обовязковий',
+          v => /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(v) || 'E-mail має бути коректним'
         ],
         passwordRules: [
-          v => !!v || 'Password is required',
-          v => (v && v.length >= 6) || 'Password must be equal or more  than 6 characters'
+          v => !!v || 'Password is обовязковий',
+          v => (v && v.length >= 6) || 'Пароль має містити 6 знаків або більше'
         ],
         confirmPasswordRules: [
-          v => !!v || 'Password is required',
-          v => v === this.password || 'Password must be equal'
+          v => !!v || 'Підтвердження паролю обовязкове',
+          v => v === this.password || 'Пароль і підтвердження мають бути однакові'
         ]
       }
     },
@@ -81,7 +81,7 @@
             email: this.email,
             password: this.password
           }
-          console.log(user)
+          alert('Ви вказали емайл: ' + user.email + ', пароль: ' + user.password)
         }
       }
     }
