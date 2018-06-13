@@ -2,7 +2,7 @@
     <div>
         <v-container fluid>
             <v-layout row>
-                <v-flex xs12>
+                <v-flex d-flex xs12>
                     <v-carousel height="800px">
                         <v-carousel-item
                                 v-for="ad in ads"
@@ -19,7 +19,8 @@
         </v-container>
         <v-container grid-list-lg>
             <v-layout row wrap>
-                <v-flex xs12
+                <v-flex d-flex
+                        xs12
                         sm6
                         md4
                 v-for="ad in ads"
