@@ -83,10 +83,9 @@
             title: this.title,
             description: this.description,
             promo: this.promo,
-            imageSrc: this.imageSrc,
-            id: (Math.random(1 + 2) * 100000).toFixed(0)
+            imageSrc: 'https://tehnojam.pro/uploads/images/00/00/24/2017/01/21/x22213660bb.jpg.pagespeed.ic.IOZqIXIMfU.jpg'
           }
-          console.log(ad)
+          this.$store.dispatch('createAd', ad)
           this.clear()
         }
       },

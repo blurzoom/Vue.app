@@ -2,20 +2,20 @@
   <v-container>
     <v-layout row>
       <v-flex xs12>
-        <h2 class="text-xs-center">Опис оголошення № {{ id }}</h2>
+        <h2 class="text-xs-center">Опис оголошення № {{ ad.id }}</h2>
       </v-flex>
     </v-layout>
     <v-layout row>
       <v-flex d-flex xs10 offset-xs1>
         <v-card class="mb-3">
           <v-card-media
-            :src="imageSrc"
+            :src="ad.imageSrc"
             height="400px"
           ></v-card-media>
           <v-flex d-flex xs12>
             <v-card-text>
-              <h2>{{ title }}</h2>
-              <p>{{ description }}</p>
+              <h2>{{ ad.title }}</h2>
+              <p>{{ ad.description }}</p>
             </v-card-text>
           </v-flex>
 
@@ -33,13 +33,11 @@
 <script>
   export default {
     name: 'Ad',
-    data () {
-      return {
-        id: this.$route.params.id,
-        title: 'Продам скалярию',
-        description: 'Опис оголошення: Продам скалярию ',
-        promo: false,
-        imageSrc: 'http://posejdon.kiev.ua/wp-content/uploads/2015/02/tcarstvo-zhivotnykh-19.jpg'
+    props: ['id'],
+    computed: {
+      ad () {
+        const id = this.id
+        return this.$store.getters.adById(id)
       }
     }
   }
